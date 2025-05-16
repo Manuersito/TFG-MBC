@@ -1,5 +1,7 @@
 import React, { useEffect, useState } from "react";
 import { Alert, SafeAreaView, ScrollView, StyleSheet, Text, TextInput, TouchableOpacity } from "react-native";
+import { useRouter } from 'expo-router';
+
 
 const API_BASE_URL = 'https://tfg-mbc.onrender.com';
 
@@ -8,6 +10,7 @@ const LoginScreen = () => {
   const [password, setPassword] = useState('');
   const [socios, setSocios] = useState([]);
   const [loadingSocios, setLoadingSocios] = useState(false); // Nuevo estado para indicar la carga de socios
+  const router = useRouter();
 
 
     // Función para obtener todos los socios de la API
@@ -94,25 +97,11 @@ const LoginScreen = () => {
         );
 
         if (socioCoincidente) {
-           console.log('Socio coincidente encontrado:', socioCoincidente);
-          if (socioCoincidente.admin === true) { // Asumiendo que la API devuelve un campo "admin"
-            Alert.alert(
-              "Login Exitoso",
-              "Bienvenido Administrador",
-              [
-                { text: "OK", onPress: () => console.log("OK Pressed") }
-              ],
-              { cancelable: false }
-            );
+          console.log('Socio encontrado, navegando...');
+          if (socioCoincidente.admin === true) {
+            router.push('/bienvenida?esAdmin=true');
           } else {
-            Alert.alert(
-              "Login Exitoso",
-              "Bienvenido Socio", // Mensaje para socios
-              [
-                { text: "OK", onPress: () => console.log("OK Pressed") }
-              ],
-              { cancelable: false }
-            );
+            router.push('/bienvenida?esAdmin=false');
           }
         }
         else{
