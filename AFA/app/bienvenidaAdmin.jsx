@@ -30,12 +30,7 @@ export default function BienvenidaAdmin() {
         <Text style={styles.buttonText}>Gestión de Localizaciones</Text>
       </TouchableOpacity>
 
-      <TouchableOpacity
-        style={styles.button}
-        onPress={() => router.push('/eventos')}
-      >
-        <Text style={styles.buttonText}>Gestión de Eventos</Text>
-      </TouchableOpacity>
+      
     </View>
   );
 }
@@ -55,7 +50,7 @@ const styles = StyleSheet.create({
     marginBottom: 40,
   },
   button: {
-    backgroundColor: '#1e90ff',
+    backgroundColor: '#FF8000',
     paddingVertical: 15,
     paddingHorizontal: 30,
     borderRadius: 10,

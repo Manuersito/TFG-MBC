@@ -1,5 +1,5 @@
 import React, { useEffect, useState } from "react";
-import { Alert, SafeAreaView, ScrollView, StyleSheet, Text, TextInput, TouchableOpacity } from "react-native";
+import { Alert, SafeAreaView, ScrollView, StyleSheet, Text, TextInput, TouchableOpacity, Image} from "react-native";
 import { useRouter } from 'expo-router';
 
 
@@ -154,6 +154,14 @@ const LoginScreen = () => {
         <Text style={styles.title}>
           {"LOGIN"}
         </Text>
+
+        {/* Imagen insertada aquí */}
+        <Image
+          source={{ uri: 'https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcRBAJa9Fl6lMBq4QawFmQnpP4drQlY5AjQ9eA&s' }} // Cambia esta URL por la que quieras
+          style={styles.image}
+          resizeMode="contain"
+        />
+
         <TextInput
           placeholder={"Usuario"}
           value={email}
@@ -184,7 +192,7 @@ const LoginScreen = () => {
             {"Entrar"}
           </Text>
         </TouchableOpacity>
-         {loadingSocios && <Text style={styles.loadingText}>Cargando socios...</Text>}
+        {loadingSocios && <Text style={styles.loadingText}>Cargando socios...</Text>}
       </ScrollView>
     </SafeAreaView>
   );
@@ -207,6 +215,12 @@ const styles = StyleSheet.create({
     marginTop: 59,
     marginBottom: 92,
     width: 225,
+  },
+  image: {
+    width: 200,
+    height: 150,
+    alignSelf: 'center',
+    marginBottom: 30,
   },
   input: {
     color: "#000000",
@@ -232,7 +246,7 @@ const styles = StyleSheet.create({
     textAlign: "center",
     width: 185,
   },
-    loadingText: { // Estilo para el texto de carga
+  loadingText: {
     color: '#FFFFFF',
     fontSize: 16,
     textAlign: 'center',
