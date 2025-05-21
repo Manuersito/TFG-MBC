@@ -201,15 +201,15 @@ const LoginScreen = () => {
 const styles = StyleSheet.create({
   safeArea: {
     flex: 1,
-    backgroundColor: "#FFFFFF",
+    backgroundColor: "#000000",
   },
   scrollView: {
     flex: 1,
-    backgroundColor: "#000000",
+    backgroundColor: "#FFFFFF",
     paddingHorizontal: 41,
   },
   title: {
-    color: "#FFFFFF",
+    color: "#000000",
     fontSize: 64,
     textAlign: "center",
     marginTop: 59,
@@ -247,7 +247,7 @@ const styles = StyleSheet.create({
     width: 185,
   },
   loadingText: {
-    color: '#FFFFFF',
+    color: '#000000',
     fontSize: 16,
     textAlign: 'center',
     marginTop: 10,
