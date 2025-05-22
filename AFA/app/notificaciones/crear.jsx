@@ -118,7 +118,7 @@ export default function CrearNotificacionScreen() {
           style={styles.picker}
           dropdownIconColor="black"
         >
-          <Picker.Item label="Todos (sin destinatario)" value="" />
+          <Picker.Item label="Todos (sin destinatario)" value={null} />
           {socios.map((socio) => (
             <Picker.Item
               key={socio.id}

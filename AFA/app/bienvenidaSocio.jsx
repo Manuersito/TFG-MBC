@@ -1,10 +1,12 @@
 import React from "react";
 import { View, Text, TouchableOpacity, StyleSheet } from "react-native";
-import { useRouter } from "expo-router";
+import { useRouter, useLocalSearchParams } from "expo-router";
 import { MapPin, Bell, User, Users } from "lucide-react-native";
 
 export default function BienvenidaSocio() {
   const router = useRouter();
+  const { idSocio } = useLocalSearchParams();
+  console.log("ID del socio recibido en bienvenida:", idSocio);
 
   return (
     <View style={styles.container}>
@@ -15,17 +17,17 @@ export default function BienvenidaSocio() {
         <Text style={styles.buttonText}>Ver Localizaciones</Text>
       </TouchableOpacity>
 
-      <TouchableOpacity style={styles.button} onPress={() => router.push("/notificaciones")}>
+      <TouchableOpacity style={styles.button} onPress={() => router.push(`/notificacion?idSocio=${idSocio}`)}>
         <Bell color="#fff" size={20} style={styles.icon} />
         <Text style={styles.buttonText}>Notificaciones</Text>
       </TouchableOpacity>
 
-      <TouchableOpacity style={styles.button} onPress={() => router.push("/perfil")}>
+      <TouchableOpacity style={styles.button} onPress={() => router.push(`/perfil?idSocio=${idSocio}`)}>
         <User color="#fff" size={20} style={styles.icon} />
         <Text style={styles.buttonText}>Mi Perfil</Text>
       </TouchableOpacity>
 
-      <TouchableOpacity style={styles.button} onPress={() => router.push("/socios")}>
+      <TouchableOpacity style={styles.button} onPress={() => router.push("/socio")}>
         <Users color="#fff" size={20} style={styles.icon} />
         <Text style={styles.buttonText}>Lista de Socios</Text>
       </TouchableOpacity>

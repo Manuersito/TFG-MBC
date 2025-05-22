@@ -93,7 +93,7 @@ const LoginScreen = () => {
 
         // Buscar el socio que coincide con el email y la contraseña
         const socioCoincidente = socios.find(socio =>
-          socio.email === email && socio.password === password // ¡¡¡NUNCA guardes contraseñas en texto plano!!!
+          socio.email === email && socio.password === password 
         );
 
         if (socioCoincidente) {
@@ -101,7 +101,7 @@ const LoginScreen = () => {
           if (socioCoincidente.admin === true) {
             router.replace('/bienvenidaAdmin');
           } else {
-            router.replace('/bienvenidaSocio');
+            router.replace(`/bienvenidaSocio?idSocio=${socioCoincidente.id}`);
           }
         }
         else{
@@ -157,7 +157,7 @@ const LoginScreen = () => {
 
         {/* Imagen insertada aquí */}
         <Image
-          source={{ uri: 'https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcRBAJa9Fl6lMBq4QawFmQnpP4drQlY5AjQ9eA&s' }} // Cambia esta URL por la que quieras
+          source={{ uri: 'https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcRBAJa9Fl6lMBq4QawFmQnpP4drQlY5AjQ9eA&s' }} 
           style={styles.image}
           resizeMode="contain"
         />
