@@ -17,58 +17,18 @@ export default function App() {
         console.log("Datos de localizaciones recibidos:", data); // Log para ver los datos
         setLocalizaciones(data);
         setLoading(false);
-
-        // Calcular la región que abarque todos los puntos
+        const defaultRegion = {
+          latitude: 40.4168,
+          longitude: -3.7038,
+          latitudeDelta: 0.3,
+          longitudeDelta: 0.3,
+        };
         if (data.length > 0) {
-          let minLat = data[0].ubicacion.coordinates[1];
-          let maxLat = data[0].ubicacion.coordinates[1];
-          let minLon = data[0].ubicacion.coordinates[0];
-          let maxLon = data[0].ubicacion.coordinates[0];
-
-          data.forEach(loc => {
-            const [longitude, latitude] = loc.ubicacion.coordinates;
-            // DEBUG: Log para verificar las coordenadas extraídas para cada marcador
-            console.log(`DEBUG: Procesando localización ${loc.nombre} - Coords API: [${loc.ubicacion.coordinates[0]}, ${loc.ubicacion.coordinates[1]}] -> Latitud extraída: ${latitude}, Longitud extraída: ${longitude}`);
-            minLat = Math.min(minLat, latitude);
-            maxLat = Math.max(maxLat, latitude);
-            minLon = Math.min(minLon, longitude);
-            maxLon = Math.max(maxLon, longitude);
-          });
-
-          const centerLat = (minLat + maxLat) / 2;
-          const centerLon = (minLon + maxLon) / 2;
-
-          // Calcular deltas iniciales
-          let latitudeDelta = (maxLat - minLat) * 1.2;
-          let longitudeDelta = (maxLon - minLon) * 1.2;
-
-          // Asegurar un delta mínimo para evitar zoom excesivo si todos los puntos están muy cerca
-          // Asegurar un delta mínimo si solo hay un punto
-          if (latitudeDelta <= 0) latitudeDelta = 0.05;
-          if (longitudeDelta <= 0) longitudeDelta = 0.05;
-
-          // Clamp deltas para evitar valores excesivamente grandes que causen problemas de renderizado
-          // El delta de latitud no puede ser mayor que 180 (altura del mundo)
-          // El delta de longitud no puede ser mayor que 360 (ancho del mundo)
-          const clampedLatitudeDelta = Math.min(latitudeDelta, 170); // Usamos 170 para dar un pequeño margen
-          const clampedLongitudeDelta = Math.min(longitudeDelta, 350); // Usamos 350 para dar un pequeño margen
-
-          const calculatedRegion = {
-            latitude: centerLat,
-            longitude: centerLon,
-            latitudeDelta: clampedLatitudeDelta,
-            longitudeDelta: clampedLongitudeDelta,
-          };
-          setMapRegion(calculatedRegion);
-          console.log("Región del mapa calculada (después de clamping):", calculatedRegion); // Log para ver la región final
+         
+          setMapRegion(defaultRegion);
+          console.log("Región del mapa calculada (después de clamping):", defaultRegion); // Log para ver la región final
         } else {
-          // Si no hay localizaciones, establecer una región por defecto (Madrid)
-          const defaultRegion = {
-            latitude: 40.4168,
-            longitude: -3.7038,
-            latitudeDelta: 0.3,
-            longitudeDelta: 0.3,
-          };
+          // Si no hay datos, establecer una región por defecto         
           setMapRegion(defaultRegion);
           console.log("No hay localizaciones, usando región por defecto:", defaultRegion); // Log si no hay datos
         }
@@ -170,16 +130,15 @@ const styles = StyleSheet.create({
   // Estilos para el overlay personalizado
   overlayContainer: {
     position: 'absolute',
-    bottom: 20, // Posiciona el overlay en la parte inferior
+    bottom: 20, 
     left: 20,
     right: 20,
     alignItems: 'center',
     justifyContent: 'center',
-    // Opcional: un fondo semitransparente para el contenedor del overlay
-    // backgroundColor: 'rgba(0,0,0,0.5)',
+    
   },
   overlayContent: {
-    width: '90%', // Ocupa la mayor parte del ancho disponible
+    width: '90%',
     padding: 20,
     backgroundColor: 'white',
     borderRadius: 10,
